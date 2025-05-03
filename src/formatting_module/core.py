@@ -67,11 +67,10 @@ def format_currency(amount, symbol = "$", decimals = 2, thousands_sep = ","):
     :param thousands_sep:
     :return str: formatted number as string
     """
-    whole, frac = divmod(abs(amount), 1)
-    whole = int(whole)
-    whole_str = f"{whole:,}".replace(",", thousands_sep)
     sign = "-" if amount < 0 else ""
-    return f"{sign}{symbol}{whole_str}{frac:.{decimals}f}"[ : -(decimals+1) ] + f".{int(frac*10**decimals):0{decimals}d}"
+    # This does both the thousands‐sep and fixed‐width decimals for you:
+    formatted = f"{abs(amount):,.{decimals}f}"
+    return f"{sign}{symbol}{formatted}"
 
 
 def format_phone_number(phone):

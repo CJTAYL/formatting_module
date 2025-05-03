@@ -1,0 +1,1 @@
+A simple Python package to assist with daily tasks completed by data analysts / scientists. 
