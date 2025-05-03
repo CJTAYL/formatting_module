@@ -6,7 +6,8 @@ Contains a series of functions for cleaning data
 import re
 import pandas as pd
 
-from typing import Sequence, Optional
+from typing import Sequence, Optional, Union
+from pathlib import Path
 
 def assign_dtypes(
     df: pd.DataFrame,
@@ -19,23 +20,12 @@ def assign_dtypes(
     """
     Cast specified DataFrame columns to the given pandas dtypes.
 
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input DataFrame to modify.
-    date_columns
-        Columns to parse with pd.to_datetime.
-    int_columns
-        Columns to cast to pandas nullable Int64.
-    string_columns
-        Columns to cast to pandas StringDtype.
-    float_columns
-        Columns to cast to float.
-
-    Returns
-    -------
-    pd.DataFrame
-        The DataFrame (modified in-place) with new dtypes.
+    param df pd.DataFrame: input DataFrame to modify.
+    param date_columns: columns to parse with pd.to_datetime.
+    param int_columns :Columns to cast to pandas nullable Int64.
+    param string_columns: columns to cast to pandas StringDtype.
+    param float_columns: Columns to cast to float.
+    returns pd.DataFrame: DataFrame (modified in-place) with new dtypes.
     """
     # Work on a copy if you don’t want to mutate the original:
     # df = df.copy()
@@ -67,19 +57,29 @@ def assign_dtypes(
     return df
 
 
+def format_currency(amount, symbol = "$", decimals = 2, thousands_sep = ","):
+    """
+    Format number as USD
+
+    :param amount:
+    :param symbol:
+    :param decimals:
+    :param thousands_sep:
+    :return str: formatted number as string
+    """
+    whole, frac = divmod(abs(amount), 1)
+    whole = int(whole)
+    whole_str = f"{whole:,}".replace(",", thousands_sep)
+    sign = "-" if amount < 0 else ""
+    return f"{sign}{symbol}{whole_str}{frac:.{decimals}f}"[ : -(decimals+1) ] + f".{int(frac*10**decimals):0{decimals}d}"
+
+
 def format_phone_number(phone):
     """
     Format phone number into standard format
 
-    Parameters
-    ----------
-    phone : string
-        Phone number to format
-
-    Returns
-    -------
-    phone: string
-        Phone number with the format (XXX) XXX-XXXX or +1 (XXX) XXX-XXXX
+    param phone : string phone number to format
+    returns phone: phone number with the format (XXX) XXX-XXXX or +1 (XXX) XXX-XXXX
     """
     if pd.isna(phone):
         return phone
@@ -97,3 +97,4 @@ def format_phone_number(phone):
             raise ValueError(
                 f'Cannot format phone number: expected 10 or 11 digits starting with 1 and got {len(digits)} digits'
             )
+
