@@ -90,3 +90,10 @@ def format_phone_number(phone):
     else:
         return phone
 
+
+def uppercase_strings(df):
+    """
+    Convert all strings in DataFrame to uppercase
+    """
+    df = df.map(lambda x: x.upper() if isinstance(x, str) else x)
+    return df
