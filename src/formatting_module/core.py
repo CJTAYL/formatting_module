@@ -81,19 +81,12 @@ def format_phone_number(phone):
     returns phone: phone number with the format (XXX) XXX-XXXX or +1 (XXX) XXX-XXXX
     """
     if pd.isna(phone):
-        return phone
-    if not isinstance(phone, str):
-        raise TypeError(f'Expected a string, got {type(phone).__name__!r}')
+        return phone 
+    digits = re.sub(r'\D', '', str(phone))
+    if len(digits) == 10:
+        return f'({digits[:3]}) {digits[3:6]}-{digits[6:]}'
+    elif len(digits) == 11 and digits.startswith('1'):
+        return f'({digits[1:4]}) {digits[4:7]}-{digits[7:]}'
     else:
-        digits = re.sub(r'\D', '', phone)
-        if len(digits) == 10:
-            area, mid, last = digits[:3], digits[3:6], digits[6:]
-            return f'({area}) {mid}-{last}'
-        elif len(digits) == 11 and digits.startswith('1'):
-            area, mid, last = digits[1:4], digits[4:7], digits[7:]
-            return f'+1 ({area}) {mid}-{last}'
-        else:
-            raise ValueError(
-                f'Cannot format phone number: expected 10 or 11 digits starting with 1 and got {len(digits)} digits'
-            )
+        return phone
 
