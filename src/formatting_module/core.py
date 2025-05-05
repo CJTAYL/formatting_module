@@ -45,8 +45,7 @@ branch_dict = {
     "ROXBORO ST": "NORTH DURHAM",
     "790": "CARRBORO",
     "CARBORO": "CARRBORO",
-    "MSC": "MEMBER SERVICE CENTER",
-
+    "MSC": "MEMBER SERVICE CENTER"
 }
 
 def assign_dtypes(
@@ -132,12 +131,17 @@ def format_phone_number(phone):
 
 
 def map_branch(branch_name):
+    """
+    Update branch name based on incorrect inputs provided by members
+
+    param branch_name: string input from member
+    returns branch_name: string with corrected branch name where appropriate
+    """
     if pd.notnull(branch_name) and branch_name in branch_dict:
         return branch_dict[branch_name]
     return branch_name
 
     
-
 def uppercase_strings(df):
     """
     Convert all strings in DataFrame to uppercase
