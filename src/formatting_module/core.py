@@ -9,6 +9,46 @@ import pandas as pd
 from typing import Sequence, Optional, Union
 from pathlib import Path
 
+branch_dict = {
+    "0": "LATINO COMMUNITY CREDIT UNION",
+    "701": "CHARLOTTE - MERIDIAN",
+    "SUCURSAL MERIDIAN": "CHARLOTTE - MERIDIAN",
+    "MERIDIAN": "CHARLOTTE - MERIDIAN",
+    "BRANCH MERIDIAN": "CHARLOTTE - MERIDIAN",
+    "VISTA DRIVE": "CHARLOTTE - MERIDIAN",
+    "UNIVERSITY CITY": "CHARLOTTE - UNIVERSITY CITY",
+    "SOUTH BOULEVARD": "CHARLOTTE - S. BLVD",
+    "SOUTH BLVD": "CHARLOTTE - S. BLVD",
+    "703": "GREENSBORO - W. MARKET",
+    "WEST MARKET GREENSBORO": "GREENSBORO - WEST MARKET",
+    "W MARKET GREENSBORO": "GREENSBORO - WEST MARKET",
+    "704": "FAYETTEVILLE",
+    "705": "GREENSBORO - W. GATE",
+    "708": "CHARLOTTE - MILTON",
+    "MILTON": "CHARLOTTE - MILTON",
+    "MILTON ROAD": "CHARLOTTE - MILTON",
+    "714": "WINSTON-SALEM",
+    "717": "DURHAM",
+    "DOWNTOWN DURHAM": "DURHAM",
+    "DOWNTOWN": "DURHAM",
+    "DURHAN": "DURHAM",
+    "DURHAM DOWNTOWN": "DURHAM",
+    "721": "VIRTUAL CENTER",
+    "737": "RALEIGH",
+    "RALEIGH, NC": "RALEIGH",
+    "RALEIGH / MSC": "RALEIGH",
+    "CAPITAL VOULEVAR": "RALEIGH",
+    "747": "GARNER",
+    "751": "CHARLOTTE - MONROE",
+    "777": "NORTH DURHAM",
+    "NORTH ROXBORO": "NORTH DURHAM",
+    "ROXBORO ST": "NORTH DURHAM",
+    "790": "CARRBORO",
+    "CARBORO": "CARRBORO",
+    "MSC": "MEMBER SERVICE CENTER",
+
+}
+
 def assign_dtypes(
     df: pd.DataFrame,
     *,
@@ -91,9 +131,18 @@ def format_phone_number(phone):
         return phone
 
 
+def map_branch(branch_name):
+    if pd.notnull(branch_name) and branch_name in branch_dict:
+        return branch_dict[branch_name]
+    return branch_name
+
+    
+
 def uppercase_strings(df):
     """
     Convert all strings in DataFrame to uppercase
     """
     df = df.map(lambda x: x.upper() if isinstance(x, str) else x)
     return df
+
+
