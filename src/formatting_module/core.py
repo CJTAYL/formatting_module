@@ -66,6 +66,7 @@ branch_dict = {
     "CAPITAL VOULEVAR": "RALEIGH",
     "CAPITAL BOULEVAR": "RALEIGH",
     "RALEIGH ": "RALEIGH",
+    "CAPITAL BOULEVAR ": "RALEIGH",
     "747": "GARNER",
     "GARNER ": "GARNER",
     "751": "CHARLOTTE - MONROE",
