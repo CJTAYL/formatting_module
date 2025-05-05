@@ -142,7 +142,18 @@ def map_branch(branch_name):
         return branch_dict[branch_name]
     return branch_name
 
-    
+def update_col_names(df, col_names=col_names):
+    """
+    Standardize column names
+
+    :param df: DataFrame to be edited
+    :param col_names: list of column names
+    :return: df with updated column names
+    """
+    df.columns = col_names
+    return df
+
+
 def uppercase_strings(df):
     """
     Convert all strings in DataFrame to uppercase
