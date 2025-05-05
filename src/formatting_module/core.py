@@ -65,6 +65,7 @@ branch_dict = {
     "RALEIGH / MSC": "RALEIGH",
     "CAPITAL VOULEVAR": "RALEIGH",
     "CAPITAL BOULEVAR": "RALEIGH",
+    "RALEIGH ": "RALEIGH",
     "747": "GARNER",
     "GARNER ": "GARNER",
     "751": "CHARLOTTE - MONROE",
@@ -75,11 +76,13 @@ branch_dict = {
     "ROXBORO ST": "NORTH DURHAM",
     "ROXBORO ST DURHAM NC": "NORTH DURHAM",
     "ROXBORO ": "NORTH DURHAM",
+    "NORTH DURHAM ": "NORTH DURHAM",
     "790": "CARRBORO",
     "CARBORO": "CARRBORO",
     "CARRBORO 790": "CARRBORO",
     "MSC": "MEMBER SERVICE CENTER",
-    "HIGH POINT ": "HIGH POINT"
+    "HIGH POINT ": "HIGH POINT",
+    "R43": "NA"
 }
 
 def assign_dtypes(
