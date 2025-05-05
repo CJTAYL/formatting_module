@@ -142,7 +142,7 @@ def map_branch(branch_name):
         return branch_dict[branch_name]
     return branch_name
 
-def update_col_names(df, col_names=col_names):
+def update_col_names(df, col_names):
     """
     Standardize column names
 
