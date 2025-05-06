@@ -7,6 +7,7 @@ import pandas as pd
 from .io import read_data
 from .core import (
     assign_dtypes,
+    clean_whitespace,
     update_col_names,
     uppercase_strings,
     map_branch,
@@ -58,7 +59,7 @@ def run_pipeline(
     )
 
     # 3) strip whitespaces 
-    df = df.applymap(lambda x: x.strip() if isinstance(x, str) and pd.notna(x) else x)
+    df = df.map(clean_whitespace)
     
     # 4) rename columns if requested
     if new_col_names is not None:
