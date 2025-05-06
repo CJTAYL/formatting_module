@@ -257,9 +257,12 @@ def map_branch(branch_name):
     param branch_name: string input from member
     returns branch_name: string with corrected branch name where appropriate
     """
-    if pd.notnull(branch_name) and branch_name in branch_dict:
-        return branch_dict[branch_name]
+    if pd.notnull(branch_name):
+        cleaned = clean_whitespace(branch_name).upper()
+        if cleaned in branch_dict:
+            return branch_dict[cleaned]
     return branch_name
+
 
 def update_col_names(df, col_names):
     """
