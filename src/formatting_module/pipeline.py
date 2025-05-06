@@ -57,25 +57,28 @@ def run_pipeline(
         float_columns=float_columns,
     )
 
-    # 3) rename columns if requested
+    # 3) strip whitespaces 
+    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+
+    # 4) rename columns if requested
     if new_col_names is not None:
         df = update_col_names(df, new_col_names)
 
-    # 4) uppercase all strings
+    # 5) uppercase all strings
     if uppercase:
         df = uppercase_strings(df)
 
-    # 5) map branch names
+    # 6) map branch names
     if branch_column and branch_column in df:
         df[branch_column] = df[branch_column].apply(map_branch)
 
-    # 6) format phone numbers
+    # 7) format phone numbers
     if phone_columns:
         for col in phone_columns:
             if col in df:
                 df[col] = df[col].apply(format_phone_number)
 
-    # 7) format currencies
+    # 8) format currencies
     if currency_columns:
         for col in currency_columns:
             if col in df:
