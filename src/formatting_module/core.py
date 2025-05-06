@@ -172,6 +172,16 @@ def assign_dtypes(
     return df
 
 
+def clean_whitespace(val):
+    """
+    Remove conventional and unconventional whitespaces
+    """
+    if isinstance(val, str):
+        # Replace any sequence of whitespace (space, tab, \xa0, etc.) with a single space and strip
+        return re.sub(r'\s+', ' ', val).strip()
+    return val
+
+
 def format_currency(amount, symbol = "$", decimals = 2, thousands_sep = ","):
     """
     Format number as USD
@@ -235,5 +245,4 @@ def uppercase_strings(df):
     """
     df = df.map(lambda x: x.upper() if isinstance(x, str) else x)
     return df
-
 
