@@ -58,8 +58,8 @@ def run_pipeline(
     )
 
     # 3) strip whitespaces 
-    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
-
+    df = df.applymap(lambda x: x.strip() if isinstance(x, str) and pd.notna(x) else x)
+    
     # 4) rename columns if requested
     if new_col_names is not None:
         df = update_col_names(df, new_col_names)
